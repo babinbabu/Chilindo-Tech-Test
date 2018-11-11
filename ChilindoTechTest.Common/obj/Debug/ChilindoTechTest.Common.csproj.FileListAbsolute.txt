@@ -1,0 +1,7 @@
+D:\factory\Testing\ChilindoTechTest.Api\ChilindoTechTest.Common\bin\Debug\ChilindoTechTest.Common.dll
+D:\factory\Testing\ChilindoTechTest.Api\ChilindoTechTest.Common\bin\Debug\ChilindoTechTest.Common.pdb
+D:\factory\Testing\ChilindoTechTest.Api\ChilindoTechTest.Common\bin\Debug\Newtonsoft.Json.dll
+D:\factory\Testing\ChilindoTechTest.Api\ChilindoTechTest.Common\bin\Debug\Newtonsoft.Json.xml
+D:\factory\Testing\ChilindoTechTest.Api\ChilindoTechTest.Common\obj\Debug\ChilindoTechTest.Common.csprojResolveAssemblyReference.cache
+D:\factory\Testing\ChilindoTechTest.Api\ChilindoTechTest.Common\obj\Debug\ChilindoTechTest.Common.dll
+D:\factory\Testing\ChilindoTechTest.Api\ChilindoTechTest.Common\obj\Debug\ChilindoTechTest.Common.pdb

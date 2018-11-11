@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ChilindoTechTestModelStoreContainer" CdmEntityContainer="ChilindoTechTestEntities">
+    <EntitySetMapping Name="AccountDetails">
+      <EntityTypeMapping TypeName="ChilindoTechTestModel.AccountDetail">
+        <MappingFragment StoreEntitySet="AccountDetail">
+          <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+          <ScalarProperty Name="Balance" ColumnName="Balance" />
+          <ScalarProperty Name="CurrencyType" ColumnName="CurrencyType" />
+          <ScalarProperty Name="HolderName" ColumnName="HolderName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AccountTransactions">
+      <EntityTypeMapping TypeName="ChilindoTechTestModel.AccountTransaction">
+        <MappingFragment StoreEntitySet="AccountTransaction">
+          <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+          <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+          <ScalarProperty Name="CurrencyType" ColumnName="CurrencyType" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="TransactionType" ColumnName="TransactionType" />
+          <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

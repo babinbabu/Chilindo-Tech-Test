@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ChilindoTechTestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AccountDetail">
+          <Key>
+            <PropertyRef Name="AccountNumber" />
+          </Key>
+          <Property Name="AccountNumber" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Balance" Type="money" />
+          <Property Name="CurrencyType" Type="int" />
+          <Property Name="HolderName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AccountTransaction">
+          <Key>
+            <PropertyRef Name="TransactionId" />
+          </Key>
+          <Property Name="TransactionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountNumber" Type="int" Nullable="false" />
+          <Property Name="CurrencyType" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="money" Nullable="false" />
+          <Property Name="TransactionType" Type="int" Nullable="false" />
+          <Property Name="TransactionDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AccountTransaction_AccountDetail">
+          <End Role="AccountDetail" Type="Self.AccountDetail" Multiplicity="1" />
+          <End Role="AccountTransaction" Type="Self.AccountTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountDetail">
+              <PropertyRef Name="AccountNumber" />
+            </Principal>
+            <Dependent Role="AccountTransaction">
+              <PropertyRef Name="AccountNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ChilindoTechTestModelStoreContainer">
+          <EntitySet Name="AccountDetail" EntityType="Self.AccountDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccountTransaction" EntityType="Self.AccountTransaction" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AccountTransaction_AccountDetail" Association="Self.FK_AccountTransaction_AccountDetail">
+            <End Role="AccountDetail" EntitySet="AccountDetail" />
+            <End Role="AccountTransaction" EntitySet="AccountTransaction" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ChilindoTechTestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AccountDetail">
+          <Key>
+            <PropertyRef Name="AccountNumber" />
+          </Key>
+          <Property Name="AccountNumber" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Balance" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="CurrencyType" Type="ChilindoTechTestModel.ChilindoCurrencyType" />
+          <Property Name="HolderName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AccountTransactions" Relationship="Self.FK_AccountTransaction_AccountDetail" FromRole="AccountDetail" ToRole="AccountTransaction" />
+        </EntityType>
+        <EntityType Name="AccountTransaction">
+          <Key>
+            <PropertyRef Name="TransactionId" />
+          </Key>
+          <Property Name="TransactionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountNumber" Type="Int32" Nullable="false" />
+          <Property Name="CurrencyType" Type="ChilindoTechTestModel.ChilindoCurrencyType" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="TransactionType" Type="ChilindoTechTestModel.ChilindoTransactionType" Nullable="false" />
+          <Property Name="TransactionDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="AccountDetail" Relationship="Self.FK_AccountTransaction_AccountDetail" FromRole="AccountTransaction" ToRole="AccountDetail" />
+        </EntityType>
+        <Association Name="FK_AccountTransaction_AccountDetail">
+          <End Role="AccountDetail" Type="Self.AccountDetail" Multiplicity="1" />
+          <End Role="AccountTransaction" Type="Self.AccountTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountDetail">
+              <PropertyRef Name="AccountNumber" />
+            </Principal>
+            <Dependent Role="AccountTransaction">
+              <PropertyRef Name="AccountNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ChilindoTechTestEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AccountDetails" EntityType="Self.AccountDetail" />
+          <EntitySet Name="AccountTransactions" EntityType="Self.AccountTransaction" />
+          <AssociationSet Name="FK_AccountTransaction_AccountDetail" Association="Self.FK_AccountTransaction_AccountDetail">
+            <End Role="AccountDetail" EntitySet="AccountDetails" />
+            <End Role="AccountTransaction" EntitySet="AccountTransactions" />
+          </AssociationSet>
+        </EntityContainer>
+        <EnumType Name="ChilindoCurrencyType" a:ExternalTypeName="Common.Enums.ChilindoCurrencyType" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        <EnumType Name="ChilindoTransactionType" UnderlyingType="Byte" a:ExternalTypeName="Common.Enums.ChilindoTransactionType" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ChilindoTechTestModelStoreContainer" CdmEntityContainer="ChilindoTechTestEntities">
+          <EntitySetMapping Name="AccountDetails">
+            <EntityTypeMapping TypeName="ChilindoTechTestModel.AccountDetail">
+              <MappingFragment StoreEntitySet="AccountDetail">
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="CurrencyType" ColumnName="CurrencyType" />
+                <ScalarProperty Name="HolderName" ColumnName="HolderName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccountTransactions">
+            <EntityTypeMapping TypeName="ChilindoTechTestModel.AccountTransaction">
+              <MappingFragment StoreEntitySet="AccountTransaction">
+                <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="CurrencyType" ColumnName="CurrencyType" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="TransactionType" ColumnName="TransactionType" />
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

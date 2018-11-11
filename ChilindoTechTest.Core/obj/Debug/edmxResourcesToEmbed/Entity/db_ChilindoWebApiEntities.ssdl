@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ChilindoTechTestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AccountDetail">
+    <Key>
+      <PropertyRef Name="AccountNumber" />
+    </Key>
+    <Property Name="AccountNumber" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Balance" Type="money" />
+    <Property Name="CurrencyType" Type="int" />
+    <Property Name="HolderName" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="AccountTransaction">
+    <Key>
+      <PropertyRef Name="TransactionId" />
+    </Key>
+    <Property Name="TransactionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AccountNumber" Type="int" Nullable="false" />
+    <Property Name="CurrencyType" Type="int" Nullable="false" />
+    <Property Name="Amount" Type="money" Nullable="false" />
+    <Property Name="TransactionType" Type="int" Nullable="false" />
+    <Property Name="TransactionDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_AccountTransaction_AccountDetail">
+    <End Role="AccountDetail" Type="Self.AccountDetail" Multiplicity="1" />
+    <End Role="AccountTransaction" Type="Self.AccountTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccountDetail">
+        <PropertyRef Name="AccountNumber" />
+      </Principal>
+      <Dependent Role="AccountTransaction">
+        <PropertyRef Name="AccountNumber" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ChilindoTechTestModelStoreContainer">
+    <EntitySet Name="AccountDetail" EntityType="Self.AccountDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AccountTransaction" EntityType="Self.AccountTransaction" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_AccountTransaction_AccountDetail" Association="Self.FK_AccountTransaction_AccountDetail">
+      <End Role="AccountDetail" EntitySet="AccountDetail" />
+      <End Role="AccountTransaction" EntitySet="AccountTransaction" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
