@@ -36,12 +36,12 @@ namespace ChilindoTechTest.Api
             {
                 if (db.AccountDetails.Count() == 0)
                 {
-                    string Sample = "Sample";
+                    string Sample = "Demo";
                     foreach (Common.Enums.DefaultAccount accountNo in (Common.Enums.DefaultAccount[])Enum.GetValues(typeof(Common.Enums.DefaultAccount)))
                     {
                         var entityAccountDetail = new ChilindoTechTest.Core.Entity.AccountDetail();
                         entityAccountDetail.HolderName = Sample + " " + accountNo;
-                        entityAccountDetail.Balance = 1000;
+                        entityAccountDetail.Balance = 0;
                         entityAccountDetail.CurrencyType = Common.Enums.ChilindoCurrencyType.USD;
                         db.AccountDetails.Add(entityAccountDetail);
 

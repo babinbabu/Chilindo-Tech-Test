@@ -17,6 +17,9 @@ namespace ChilindoTechTest.Common
         {
             ACCNo1 = 1000,
             ACCNo2 = 1001,
+            ACCNo3 = 1002,
+            ACCNo4 = 1003,
+            ACCNo5 = 1004,
 
         }
         public enum ChilindoCurrencyType : int
